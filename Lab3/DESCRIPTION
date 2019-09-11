@@ -1,0 +1,10 @@
+Package: Lab3
+Type: Package
+Title: Functions for euclidean and dijkstra algorithms
+Version: 1.0
+Date: 2019-09-11
+Author: Namita Sharma
+Maintainer: Who to complain to <yourfault@somewhere.net>
+Description: More about what it does (maybe more than one line)
+License: What license is it under?
+RoxygenNote: 6.1.1
