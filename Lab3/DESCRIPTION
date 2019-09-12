@@ -3,8 +3,10 @@ Type: Package
 Title: Functions for euclidean and dijkstra algorithms
 Version: 1.0
 Date: 2019-09-11
-Author: Namita Sharma
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Author: Namita Sharma, Vyshnavi
+Maintainer: Namita Sharma <namsh440@student.liu.se>
+Description: Euclidean function to calculate the greatest common divisor of two numbers and dijkstra function to compute the shortest distance from a source node to all the other nodes in a graph
+License: GPL - 2
 RoxygenNote: 6.1.1
+Suggests: 
+    testthat

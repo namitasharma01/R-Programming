@@ -1,5 +1,12 @@
 #Advanced Programming in R - Lab 3
-#Euclidean algorithm
+
+#' @title Euclidean algorithm
+#' @description This package computes the greatest common divisor for two given numbers
+#' @param x (numeric scalar)
+#' @param y (numeric scalar)
+#' @return greatest common divisor (numeric scalar)
+#' @examples euclidean(100, 1000)
+#' @export euclidean
 
 name  <- "Namita Sharma"
 liuid <- "namsh440"
