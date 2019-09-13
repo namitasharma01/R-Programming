@@ -14,7 +14,7 @@ liuid <- "namsh440"
 dijkstra2 <- function(graph, init_node){
   
   if( !is.data.frame(graph) || 
-      !(which(graph[["v1"]]==init_node) || which(graph[["v2"]]==init_node)) ){
+      !(any(graph[["v1"]]==init_node) || any(graph[["v2"]]==init_node)) ){
     stop("Invalid inputs")
   } 
 
