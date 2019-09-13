@@ -1,6 +1,13 @@
 #Advanced Programming in R - Lab 3
 #Dijkstra algorithm
 
+#' @title Dijkstra algorithm
+#' @description This package computes the shortest distance from a source node to all the other nodes in a graph 
+#' @param graph (dataframe)
+#' @param init_node (scalar)
+#' @return dist (vector)
+#' @examples dijkstra(wiki_graph, 1)
+#' 
 name  <- "Namita Sharma"
 liuid <- "namsh440"
 
