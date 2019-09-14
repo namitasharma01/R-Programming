@@ -3,7 +3,7 @@
 \docType{data}
 \name{name}
 \alias{name}
-\title{Dijkstra algorithm}
+\title{Euclidean and Dijkstra Algorithms}
 \format{An object of class \code{character} of length 1.}
 \usage{
 name
@@ -33,16 +33,13 @@ dist (vector)
 greatest common divisor (numeric scalar)
 }
 \description{
-This package computes the shortest distance from a source node to all the other nodes in a graph
-
-This package computes the shortest distance from a source node to all the other nodes in a graph
-
-This package computes the greatest common divisor for two given numbers
+This package contains functions to compute the greatest 
+    common divisor for two given numbers and find the shortest distance 
+    from a source node to all the other nodes in a graph
 }
 \examples{
 dijkstra(wiki_graph, 1)
-dijkstra(wiki_graph, 1)
-
+dijkstra2(wiki_graph3, "a")
 euclidean(100, 1000)
 }
 \keyword{datasets}

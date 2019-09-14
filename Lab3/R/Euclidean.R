@@ -1,7 +1,9 @@
 #Advanced Programming in R - Lab 3
 
-#' @title Euclidean algorithm
-#' @description This package computes the greatest common divisor for two given numbers
+#' @title Euclidean and Dijkstra Algorithms
+#' @description This package contains functions to compute the greatest 
+#'     common divisor for two given numbers and find the shortest distance 
+#'     from a source node to all the other nodes in a graph 
 #' @param x (numeric scalar)
 #' @param y (numeric scalar)
 #' @return greatest common divisor (numeric scalar)

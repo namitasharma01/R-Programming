@@ -1,12 +1,16 @@
 Package: Lab3
 Type: Package
-Title: Functions for euclidean and dijkstra algorithms
-Version: 1.0
+Title: Functions for Euclidean and Dijkstra Algorithms
+Version: 1.0.0
 Date: 2019-09-11
-Author: Namita Sharma, Vyshnavi
+Author@R: person("Namita", "Sharma", email="namitasharma.01@outlook.com", role=C("aut","cre")),
+          person("Vyshnavi, "", <>, [aut, cre])
 Maintainer: Namita Sharma <namsh440@student.liu.se>
-Description: Euclidean function to calculate the greatest common divisor of two numbers and dijkstra function to compute the shortest distance from a source node to all the other nodes in a graph
-License: GPL - 2
+Description: An implementation of the Euclidean function to calculate the greatest common divisor 
+    of two numbers and Dijkstra function to compute the shortest distance 
+    from a source node to all the other nodes in a graph.
+License: MIT + file LICENSE
+Encoding: UTF-8
 RoxygenNote: 6.1.1
 Suggests: 
     testthat
