@@ -1,23 +1,27 @@
-#Advanced Programming in R - Lab 3
-#Dijkstra algorithm
+#' Advanced Programming in R - Lab 3
+#' Dijkstra algorithm modified
 
-#' @title Euclidean and Dijkstra Algorithms
-#' @param graph (dataframe)
-#' @param init_node (scalar)
-#' @return dist (vector)
-#' @examples dijkstra2(wiki_graph3, "a")
-#' @export dijkstra2
+#' @name dijkstra2
+#' @aliases dijkstra2
+#' @rdname dijkstra2
+#' @title Dijkstra Algorithm modified
+#' @description This function finds the shortest distance from a source 
+#'              node to all the other nodes in a graph 
+#' @param graph Dataframe
+#' @param init_node Scalar
+#' @return Numeric vector representing the shortest distance form 
+#'         init_node to all the other nodes in graph
+#' @usage dijkstra2(graph, init_node)
+#' @examples dijkstra2(wiki_graph2, "a")
+#' @export
 
-name  <- "Namita Sharma"
-liuid <- "namsh440"
-
-dijkstra2 <- function(graph, init_node){
+dijkstra2 <- function(graph, init_node) {
   
-  if( !is.data.frame(graph) || 
-      !(any(graph[["v1"]]==init_node) || any(graph[["v2"]]==init_node)) ){
+  if (!is.data.frame(graph) || 
+      !(init_node %in% graph[["v1"]] || init_node %in% graph[["v2"]])) {
     stop("Invalid inputs")
   } 
-
+  
   # Create vertex set for all unique vertices in the graph
   vertex_Q <- unique(graph[["v1"]])
   names(vertex_Q) <- as.character(1:length(vertex_Q))
@@ -38,37 +42,37 @@ dijkstra2 <- function(graph, init_node){
   }
   
   # Set the distance for the initial node as zero 
-  dist[ which(vertex_Q==init_node) ] <- 0
+  dist[which(vertex_Q == init_node)] <- 0
   
   i <- 1
-  while (length(vertex_Q) != 0){
+  while (length(vertex_Q) != 0) {
     # Select a vertex in Q with minimum distance in dist
-    u <- vertex_Q[ names(dist[ which(dist == min(dist[ names(vertex_Q) ])) ]) ]
+    u <- vertex_Q[names(dist[which(dist == min(dist[names(vertex_Q)]))])]
     
     # Remove vertex u from Q
-    vertex_Q <- vertex_Q[ -which(vertex_Q==u) ]
+    vertex_Q <- vertex_Q[-which(vertex_Q == u)]
     
     for (v in vertex_Q) {
       # Neighbours of vertex u that are still in Q and their distance from u
-      neighbour <- graph[ which( graph[["v1"]]==u ), c("v2", "w")]
+      neighbour <- graph[which(graph[["v1"]] == u), c("v2", "w")]
       
-      if( any(neighbour[["v2"]] == v) ){
+      if (any(neighbour[["v2"]] == v)) {
         # Alternate distance to vertex v
-        alt <- dist[names(u)] + neighbour[ which( neighbour[["v2"]]==v ), "w" ]
-      
-        if( alt < dist[ names(vertex_Q[ which(vertex_Q==v) ]) ]){
+        alt <- dist[names(u)] + neighbour[which(neighbour[["v2"]] == v), "w"]
+        
+        if( alt < dist[names(vertex_Q[which(vertex_Q == v)])]) {
           # Replace distance for vertex v in dist if alt is shorter than distance in dist
-          dist[ names(vertex_Q[ which(vertex_Q==v) ]) ] <- alt
-          prev[ names(vertex_Q[ which(vertex_Q==v) ]) ] <- u
+          dist[names(vertex_Q[which(vertex_Q == v)])] <- alt
+          prev[names(vertex_Q[which(vertex_Q == v)])] <- u
         }
       }
     }
-    i <- i+1
+    i <- i + 1
   }
   names(dist) <- NULL
   return(dist)
 }
 
-is.numeric.scalar <- function(x){
-  return( is.numeric(x) && length(x)==1 )
+is.numeric.scalar <- function(x) {
+  return(is.numeric(x) && length(x) == 1)
 }

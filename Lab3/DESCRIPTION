@@ -3,8 +3,8 @@ Type: Package
 Title: Functions for Euclidean and Dijkstra Algorithms
 Version: 1.0.0
 Date: 2019-09-11
-Author@R: person("Namita", "Sharma", email="namitasharma.01@outlook.com", role=C("aut","cre")),
-          person("Vyshnavi, "", <>, [aut, cre])
+Authors@R: c( person("Namita", "Sharma", email="namitasharma.01@outlook.com", role=c("aut","cre")),
+              person("Vyshnavi", role="aut") )
 Maintainer: Namita Sharma <namsh440@student.liu.se>
 Description: An implementation of the Euclidean function to calculate the greatest common divisor 
     of two numbers and Dijkstra function to compute the shortest distance 
@@ -14,3 +14,5 @@ Encoding: UTF-8
 RoxygenNote: 6.1.1
 Suggests: 
     testthat
+LazyData: true
+Depends: R (>= 3.1.0)

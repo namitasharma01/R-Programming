@@ -1,26 +1,30 @@
-#Advanced Programming in R - Lab 3
+#' Advanced Programming in R - Lab 3
+#' Dijkstra algorithm
 
-#' @title Euclidean and Dijkstra Algorithms
-#' @param graph (dataframe)
-#' @param init_node (scalar)
-#' @return dist (vector)
+#' @name dijkstra
+#' @aliases dijkstra
+#' @title Dijkstra Algorithm
+#' @description This function finds the shortest distance from a source 
+#'              node to all the other nodes in a graph 
+#' @param graph Dataframe
+#' @param init_node Numeric scalar
+#' @return Numeric vector representing the shortest distance form 
+#'         init_node to all the other nodes in graph
+#' @usage dijkstra(graph, init_node)
 #' @examples dijkstra(wiki_graph, 1)
-#' @export dijkstra
+#' @export 
 
-name  <- "Namita Sharma"
-liuid <- "namsh440"
-
-dijkstra <- function(graph, init_node){
-
-  if( !is.data.frame(graph) ||
+dijkstra <- function(graph, init_node) {
+  
+  if (!is.data.frame(graph) ||
       !is.numeric.scalar(init_node) ||
-      !(any(graph[["v1"]]==init_node) || any(graph[["v2"]]==init_node)) ){
+      !(init_node %in% graph[["v1"]] || init_node %in% graph[["v2"]])) {
     stop("Invalid inputs")
   }
-
+  
   # Create vertex set
   vertex_Q <- unique(graph[["v1"]])
-
+  
   # Set distance as Infinity and previous node as NA for each vertex in graph
   dist <- numeric(length(vertex_Q))
   prev <- numeric(length(vertex_Q))
@@ -28,24 +32,24 @@ dijkstra <- function(graph, init_node){
     dist[i] <- Inf
     prev[i] <- NA
   }
-  dist[ which(vertex_Q==init_node) ] <- 0
-
+  dist[which(vertex_Q == init_node)] <- 0
+  
   i <- 1
-  while(length(vertex_Q) != 0){
+  while (length(vertex_Q) != 0) {
     # u - vertex in Q with minimum distance dist[u]
-    u <- which(dist == min( dist[vertex_Q] ))
-
+    u <- which(dist == min(dist[vertex_Q]))
+    
     # Remove vertex u from Q
-    vertex_Q <- vertex_Q[ -which(vertex_Q==u) ]
-
+    vertex_Q <- vertex_Q[-which(vertex_Q == u)]
+    
     for (v in vertex_Q) {
       # Neighbours of vertex u that are still in Q and their distance from u
-      neighbour <- graph[ which( graph[["v1"]]==u ), c("v2", "w")]
-
-      if( any(neighbour[["v2"]] == v) ){
-        alt <- dist[u] + neighbour[ which( neighbour[["v2"]]==v ), "w" ]
-
-        if(alt < dist[v]){
+      neighbour <- graph[which( graph[["v1"]] == u ), c("v2", "w")]
+      
+      if (any(neighbour[["v2"]] == v)) {
+        alt <- dist[u] + neighbour[which(neighbour[["v2"]] == v ), "w"]
+        
+        if (alt < dist[v]) {
           dist[v] <- alt
           prev[v] <- u
         }
@@ -56,6 +60,6 @@ dijkstra <- function(graph, init_node){
   return(dist)
 }
 
-is.numeric.scalar <- function(x){
-  return( is.numeric(x) && length(x)==1 )
+is.numeric.scalar <- function(x) {
+  return(is.numeric(x) && length(x) == 1)
 }

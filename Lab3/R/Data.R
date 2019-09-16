@@ -1,0 +1,31 @@
+#' Wikipedia Graph
+#' 
+#' A sample graph with six vertices and their weighted edges
+#' 
+#' @format The graph is a data frame with three variables (v1, v2 and w) 
+#'   that contains the edges of the graph (from v1 to v2) with the weight 
+#'   of the edge (w):
+#'   
+#' \describe{
+#'   \item{v1}{vertex, starting point of edge in the graph}
+#'   \item{v2}{vertex, ending point of edge in the graph}
+#'   \item{w}{weight of the edge}
+#' }
+#' @source \url{"https://en.wikipedia.org/wiki/Dijkstra\%27s_algorithm"}
+"wiki_graph"
+
+
+#' Wikipedia Graph2 (Character vertices)
+#' 
+#' A sample graph with six vertices and their weighted edges
+#' 
+#' @format The graph is a data frame with three variables (v1, v2 and w) 
+#'   that contains the edges of the graph (from v1 to v2) with the weight 
+#'   of the edge (w):
+#'   
+#' \describe{
+#'   \item{v1}{vertex, starting point of edge in the graph}
+#'   \item{v2}{vertex, ending point of edge in the graph}
+#'   \item{w}{weight of the edge}
+#' }
+"wiki_graph2"
