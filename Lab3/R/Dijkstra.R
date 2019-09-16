@@ -18,7 +18,7 @@ dijkstra <- function(graph, init_node) {
   
   if (!is.data.frame(graph) ||
       !is.numeric.scalar(init_node) ||
-      !(init_node %in% graph[["v1"]] || init_node %in% graph[["v2"]])) {
+      !(init_node %in% union(graph[["v1"]], graph[["v2"]]))) {
     stop("Invalid inputs")
   }
   
