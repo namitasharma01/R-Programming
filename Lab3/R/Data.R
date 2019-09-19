@@ -15,7 +15,7 @@
 "wiki_graph"
 
 
-#' Wikipedia Graph2 (Character vertices)
+#' Random Graph (Random vertices)
 #' 
 #' A sample graph with six vertices and their weighted edges
 #' 
@@ -28,4 +28,4 @@
 #'   \item{v2}{vertex, ending point of edge in the graph}
 #'   \item{w}{weight of the edge}
 #' }
-"wiki_graph2"
+"random_graph"
