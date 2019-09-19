@@ -3,6 +3,9 @@
 \name{dijkstra}
 \alias{dijkstra}
 \title{Dijkstra Algorithm modified}
+\source{
+\url{"https://en.wikipedia.org/wiki/Dijkstra\%27s_algorithm"}
+}
 \usage{
 dijkstra(graph, init_node)
 }

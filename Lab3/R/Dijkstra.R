@@ -13,6 +13,7 @@
 #'         init_node to all the other nodes in graph
 #' @usage dijkstra(graph, init_node)
 #' @examples dijkstra(wiki_graph, 1)
+#' @source \url{"https://en.wikipedia.org/wiki/Dijkstra\%27s_algorithm"} 
 #' @export
 
 dijkstra <- function(graph, init_node) {
