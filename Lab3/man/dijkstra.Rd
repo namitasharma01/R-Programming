@@ -27,5 +27,5 @@ Advanced Programming in R - Lab 3
 Dijkstra algorithm
 }
 \examples{
-dijkstra(wiki_graph, 1)
+dijkstra(graph = wiki_graph, init_node = 1)
 }

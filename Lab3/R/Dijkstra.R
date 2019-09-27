@@ -3,7 +3,6 @@
 
 #' @name dijkstra
 #' @aliases dijkstra
-#' @rdname dijkstra
 #' @title Dijkstra Algorithm
 #' @description This function finds the shortest distance from a source 
 #'              node to all the other nodes in a graph
@@ -12,7 +11,7 @@
 #' @return Numeric vector representing the shortest distance form 
 #'         init_node to all the other nodes in graph
 #' @usage dijkstra(graph, init_node)
-#' @examples dijkstra(wiki_graph, 1)
+#' @examples dijkstra(graph = wiki_graph, init_node = 1)
 #' @source \url{"https://en.wikipedia.org/wiki/Dijkstra\%27s_algorithm"} 
 #' @export
 

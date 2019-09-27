@@ -10,7 +10,7 @@
 #' @param y Numeric scalar
 #' @return Numeric scalar which is greatest common divisor of x and y
 #' @usage euclidean(x, y)
-#' @examples euclidean(100, 1000)
+#' @examples euclidean(x = 100, y = 1000)
 #' @source \url{"https://en.wikipedia.org/wiki/Euclidean_algorithm"} 
 #' @export 
 

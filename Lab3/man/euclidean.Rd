@@ -26,5 +26,5 @@ Advanced Programming in R - Lab 3
 Euclidean algorithm
 }
 \examples{
-euclidean(100, 1000)
+euclidean(x = 100, y = 1000)
 }
