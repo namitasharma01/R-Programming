@@ -2,7 +2,7 @@
 % Please edit documentation in R/Dijkstra.R
 \name{dijkstra}
 \alias{dijkstra}
-\title{Dijkstra Algorithm modified}
+\title{Dijkstra Algorithm}
 \source{
 \url{"https://en.wikipedia.org/wiki/Dijkstra\%27s_algorithm"}
 }
