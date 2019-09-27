@@ -6,7 +6,7 @@
 #' @rdname dijkstra
 #' @title Dijkstra Algorithm
 #' @description This function finds the shortest distance from a source 
-#'              node to all the other nodes in a graph 
+#'              node to all the other nodes in a graph
 #' @param graph Dataframe
 #' @param init_node Numeric scalar
 #' @return Numeric vector representing the shortest distance form 
