@@ -1,15 +1,20 @@
 Package: Lab4
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Title: Linear Regression Model
+Version: 1.0.0
+Date: 2019-09-27
+Author: c(person("Namita", "Sharma", email = "namsh440@student.liu.se", role = c("aut", "cre")),
+          person("Vyshnavi", "Pisupati", email = "vyspi394@student.liu.se", role = "aut"))
+Maintainer: Namita Sharma <namsh440@student.liu.se>, Vyshnavi Pisupati <vyspi394@student.liu.se>
+Description: An implementation of a linear regression model using linear algebra calculations 
+    and RC class to handle special output functions.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
 imports: 
     ggplot2, 
-    graphics
+    graphics,
+    methods
+Suggests: 
+    testthat
