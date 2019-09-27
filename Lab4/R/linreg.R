@@ -44,9 +44,9 @@ linreg <-
         beta_hat_v <- round(x = as.vector(beta_hat), digits = 5)
         names(beta_hat_v) <- dimnames(beta_hat)[[1]]
 
-        cat("\nCall:\n",
-            paste0("linreg(formula = ", format(formula), ", data = ", deparse(substitute(data)), ")"),
-            "\n\nCoefficients:\n")
+        #cat("\nCall:\n",
+        #    paste0("linreg(formula = ", format(formula), ", data = ", deparse(substitute(data)), ")"),
+        #    "\n\nCoefficients:\n")
 
         return(beta_hat_v)
       },
@@ -59,35 +59,46 @@ linreg <-
         f_outliers <- ifelse(is_outlier(as.vector(E_hat)), rownames(data), as.numeric(NA))
         g_outliers <- ifelse(is_outlier(as.vector(E_hat_std)), rownames(data), as.numeric(NA))
 
+        # Residuals vs Fitted graph
         f <- ggplot2::ggplot(data    = as.data.frame(cbind(Y_hat, E_hat)),
                              mapping = ggplot2::aes(x = Y_hat, y = E_hat)) +
-          ggplot2::geom_point(shape = 1) +
-          ggplot2::labs(title = "Residuals vs Fitted",
-                        x = paste("Fitted values \nlinreg(", format(formula), ")"),
-                        y = "Residuals") +
-          ggplot2::theme_classic() +
-          ggplot2::theme(plot.title   = ggplot2::element_text(hjust = 0.5),
-                         panel.border = ggplot2::element_rect(fill = NA)) +
-          #plot.margin  = ggplot2::margin(t = 0, r = 0, b = 0, l = 0, unit = "mm")) +
-          #ggplot2::stat_summary(fun.y = median, color = "red", geom = "line", size = 1) +
-          #ggplot2::stat_summary(fun.y = mean, color = "black", geom = "line", linetype = "dotted", size = 1) +
-          ggplot2::geom_text(ggplot2::aes(label = f_outliers), na.rm = TRUE, hjust = -0.3, size = 3) +
-          ggplot2::geom_smooth(method = lowess(as.data.frame(cbind(Y_hat, E_hat))), col = 2)
-        #graphics::lines(lowess(as.data.frame(cbind(Y_hat, E_hat))), col = 2)
+
+             ggplot2::geom_point(shape = 1) +
+
+             ggplot2::labs(title = "Residuals vs Fitted",
+                               x = paste("Fitted values \nlinreg(", format(formula), ")"),
+                               y = "Residuals") +
+
+             ggplot2::geom_text(ggplot2::aes(label = f_outliers), na.rm = TRUE, hjust = -0.3, size = 3) +
+
+             ggplot2::theme_classic() +
+
+             ggplot2::theme(plot.title   = ggplot2::element_text(hjust = 0.5),
+                            panel.border = ggplot2::element_rect(fill = NA)) +
+
+             ggplot2::geom_smooth(method = "loess", se = FALSE, col = 2)
 
 
+        # Scale-Location graph
         g <- ggplot2::ggplot(data    = as.data.frame(cbind(Y_hat, E_hat_std)),
                              mapping = ggplot2::aes(x = Y_hat, y = E_hat_std)) +
-          ggplot2::geom_point(shape = 1) +
-          ggplot2::labs(title = "Scale-Location",
-                        x = paste("Fitted values \nlinreg(", format(formula), ")"),
-                        y = expression(sqrt("Standardized Residuals"))) +
-          ggplot2::theme_classic() +
-          ggplot2::theme(plot.title   = ggplot2::element_text(hjust = 0.5),
-                         panel.border = ggplot2::element_rect(fill = NA)) +
-          ggplot2::stat_summary(fun.y = mean , color = "red" , geom = "line" , size = 1) +
-          ggplot2::geom_text(ggplot2::aes(label = g_outliers), na.rm = TRUE, hjust = -0.3)
 
+             ggplot2::geom_point(shape = 1) +
+
+             ggplot2::labs(title = "Scale-Location",
+                           x = paste("Fitted values \nlinreg(", format(formula), ")"),
+                           y = expression(sqrt("Standardized Residuals"))) +
+
+             ggplot2::geom_text(ggplot2::aes(label = g_outliers), na.rm = TRUE, hjust = -0.3) +
+
+             ggplot2::theme_classic() +
+
+             ggplot2::theme(plot.title   = ggplot2::element_text(hjust = 0.5),
+                            panel.border = ggplot2::element_rect(fill = NA)) +
+
+             ggplot2::geom_smooth(method = "loess", se = FALSE, col = 2)
+
+        # Plot the two graphs on the same window
         gridExtra::grid.arrange(f, g, nrow = 2, respect = TRUE)
       },
 
@@ -112,8 +123,8 @@ linreg <-
                             "t value"    = round(x = t_values, digits = 2),
                             "P value"    = as.numeric(formatC(x = p_values, digits = 0)))
 
-        cat("\nCall:\n",
-            paste0("linreg(formula = ", format(formula), ", data = ", deparse(substitute(data)), ")\n\n"))
+        #cat("\nCall:\n",
+        #    paste0("linreg(formula = ", format(formula), ", data = ", Data, ")\n\n"))
 
         print.data.frame(coeff)
         cat("\nResidual standard error:", round(x = sqrt(sigsq_hat), digits = 4),
@@ -127,4 +138,3 @@ linreg1 <- function(formula, data) {
                            data    = data)
   return(linreg_obj)
 }
-
