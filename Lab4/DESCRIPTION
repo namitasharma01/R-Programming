@@ -10,10 +10,15 @@ Description: An implementation of a linear regression model using linear algebra
     and RC class to handle special output functions.
 License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: true
 RoxygenNote: 6.1.1
+LazyData: true
 imports: 
+    methods,
     ggplot2, 
     graphics
+Depends: R (>= 2.10)
 Suggests: 
-    testthat
+    testthat,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

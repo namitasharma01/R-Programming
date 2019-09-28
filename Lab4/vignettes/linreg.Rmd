@@ -1,0 +1,83 @@
+---
+title: "Linear Regression Model"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Linear Regression Model}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+library(Lab4)
+library(ggplot2)
+library(graphics)
+library(methods)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This vignette describes the function **`linreg_f`** to create a linear regression model and explains how to use the implemented methods of the RC class **`linreg`** to analyze the model. 
+
+## Function linreg_f
+
+The function linreg_f has two arguments `formula` and `data`. The argument `formula` is a `formula` object in R and `data` is a sample dataset e.g. `iris`, `cars`. The function returns an object of RC class `linreg`. 
+
+In the example shown below, class object `linreg_mod` is a linear regression model built based on the `formula` and `data` values as passed to the function
+
+```{r, eval=TRUE}
+linreg_mod <- linreg$new(formula = Petal.Length ~ Species, data = iris)
+```
+
+The results of the model can be viewed using the implemented RC class methods as shown in the following examples:
+
+### Method print()
+
+Prints out the regression coefficients and coefficient names
+```{r, eval=TRUE}
+linreg_mod$print()
+```
+
+### Method plot()
+
+Plots two graphs - Residuals vs Fitted graph and Scale - Location
+
+```{r, eval=TRUE, warning=FALSE}
+linreg_mod$plot()
+```
+```{r, eval=TRUE, warning=FALSE}
+linreg_mod$plot()
+```
+
+### Method resid()
+
+Returns the vector of residuals
+
+```{r, eval=TRUE}
+head(linreg_mod$resid())
+```
+
+### Method pred()
+
+Returns the predicted values
+
+```{r, eval=TRUE}
+head(linreg_mod$pred())
+```
+
+### Method coef()
+
+Returns the regression coefficients as a named vector
+    
+```{r, eval=TRUE}
+linreg_mod$coef()
+```
+
+### Method summary()
+
+Prints out the regression coefficients with their standard error, t-values and p-values, along with the estimate of residual standard error and degrees of freedom in the model
+
+```{r, eval=TRUE}
+linreg_mod$summary()
+```
