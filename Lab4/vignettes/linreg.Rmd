@@ -5,13 +5,12 @@ vignette: >
   %\VignetteIndexEntry{Linear Regression Model}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteDepends{ggplot2, gridExtra}
 ---
 
-```{r, include = FALSE}
+```{r setup, eval=TRUE, include = FALSE}
 library(Lab4)
-library(ggplot2)
-library(graphics)
-library(methods)
+
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -34,25 +33,22 @@ The results of the model can be viewed using the implemented RC class methods as
 
 ### Method print()
 
-Prints out the regression coefficients and coefficient names
+Prints out the regression `coefficients` and coefficient names
 ```{r, eval=TRUE}
 linreg_mod$print()
 ```
 
 ### Method plot()
 
-Plots two graphs - Residuals vs Fitted graph and Scale - Location
+Plots two graphs - `Residuals vs Fitted graph` and `Scale - Location`
 
-```{r, eval=TRUE, warning=FALSE}
-linreg_mod$plot()
-```
-```{r, eval=TRUE, warning=FALSE}
+```{r, eval=TRUE, warning=FALSE, fig.width=7}
 linreg_mod$plot()
 ```
 
 ### Method resid()
 
-Returns the vector of residuals
+Returns the vector of `residuals`
 
 ```{r, eval=TRUE}
 head(linreg_mod$resid())
@@ -60,7 +56,7 @@ head(linreg_mod$resid())
 
 ### Method pred()
 
-Returns the predicted values
+Returns the `predicted` values
 
 ```{r, eval=TRUE}
 head(linreg_mod$pred())
@@ -68,7 +64,7 @@ head(linreg_mod$pred())
 
 ### Method coef()
 
-Returns the regression coefficients as a named vector
+Returns the regression `coefficients` as a named vector
     
 ```{r, eval=TRUE}
 linreg_mod$coef()
@@ -76,8 +72,13 @@ linreg_mod$coef()
 
 ### Method summary()
 
-Prints out the regression coefficients with their standard error, t-values and p-values, along with the estimate of residual standard error and degrees of freedom in the model
+Prints out the regression `coefficients` with their `standard error`, `t-values` and `p-values`, along with the estimate of `residual standard error` and `degrees of freedom` in the model
 
 ```{r, eval=TRUE}
 linreg_mod$summary()
+```
+
+
+```{r}
+
 ```

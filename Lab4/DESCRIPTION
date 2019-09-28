@@ -12,11 +12,13 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 RoxygenNote: 6.1.1
 LazyData: true
-imports: 
-    methods,
-    ggplot2, 
-    graphics
-Depends: R (>= 2.10)
+Imports: 
+    ggplot2,
+    gridExtra,
+    graphics,
+    methods
+Depends: 
+    R (>= 2.10)
 Suggests: 
     testthat,
     knitr,

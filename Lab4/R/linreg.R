@@ -17,6 +17,8 @@
 #' obj$print()
 #' obj$plot()
 #' }
+#' @importFrom methods new setRefClass
+#' @importFrom gridExtra grid.arrange
 #' @export linreg
 
 linreg <-

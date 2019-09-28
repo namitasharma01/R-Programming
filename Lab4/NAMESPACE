@@ -2,3 +2,6 @@
 
 export(linreg)
 export(linreg_f)
+importFrom(gridExtra,grid.arrange)
+importFrom(methods,new)
+importFrom(methods,setRefClass)
