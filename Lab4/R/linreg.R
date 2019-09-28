@@ -137,17 +137,26 @@ linreg <-
         return(beta_hat_v)
       },
 
-      summary = function() {
-        coeff <- data.frame("Estimate"   = round(x = as.vector(beta_hat), digits = 5),
-                            "Std. Error" = round(x = std_e,    digits = 5),
-                            "t value"    = round(x = t_values, digits = 2),
-                            "P value"    = as.numeric(formatC(x = p_values, digits = 0)))
+    summary = function() {
+        significance <- ifelse(p_values < 0.001, noquote("***"),
+                               ifelse(p_values < 0.01, noquote("**"),
+                                      ifelse(p_values < 0.05, noquote("*"),
+                                             ifelse(p_values < 0.1, noquote("."), noquote(" ")))))
+
+        coeff <- data.frame("Estimate"    = round(x = as.vector(beta_hat), digits = 5),
+                            "Std. Error"  = round(x = std_e,    digits = 5),
+                            "t value"     = round(x = t_values, digits = 2),
+                            "P value"     = as.numeric(formatC(x = p_values, digits = 2)),
+                            "signif.code" = significance)
 
         cat("\nCall:\n",
             paste0("linreg(formula = ", format(formula), ", data = iris", ")\n\n"))
 
         print.data.frame(coeff)
-        cat("\nResidual standard error:", round(x = sqrt(sigsq_hat), digits = 4),
+
+        cat("\n---\n",
+            "Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1",
+            "\n\nResidual standard error:", round(x = sqrt(sigsq_hat), digits = 4),
             "on", df, "degrees of freedom")
       }
     )
@@ -164,7 +173,7 @@ linreg <-
 #' @usage linreg_f(formula, data)
 #' @examples linreg_f(formula = Petal.Length ~ Species, data = iris)
 #' @export
-#'
+
 linreg_f <- function(formula, data) {
   linreg_obj <- linreg$new(formula = formula,
                            data    = data)
