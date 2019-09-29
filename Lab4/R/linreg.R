@@ -82,17 +82,16 @@ linreg <-
         print.data.frame(beta_hat_df, digits = 4, row.names = FALSE)
       },
 
-      is_outlier = function(x, limit) {
-        "Return TRUE if data point x is an outlier based on the specified limit"
+      is_outlier = function(x) {
+        "Return TRUE if data point x is an outlier based on the 1.5 rule"
 
-        return(x < quantile(x, 0.25) - limit * IQR(x) | x > quantile(x, 0.75) + limit * IQR(x))
+        return(x < quantile(x, 0.25) - 1.5 * IQR(x) | x > quantile(x, 0.75) + 1.5 * IQR(x))
       },
 
       plot = function() {
         "Plot two graphs - Residuals vs Fitted graph and Scale-Location"
 
-        f_outliers <- ifelse(is_outlier(as.vector(E_hat), 1.75), rownames(data), as.numeric(NA))
-        g_outliers <- ifelse(is_outlier(as.vector(E_hat_std), 0.9), rownames(data), as.numeric(NA))
+        outliers <- ifelse(is_outlier(as.vector(E_hat)), rownames(data), as.numeric(NA))
 
         # Residuals vs Fitted graph
         f <- ggplot2::ggplot(data    = as.data.frame(cbind(Y_hat, E_hat)),
@@ -104,7 +103,7 @@ linreg <-
                             x = paste("Fitted values \nlinreg(", format(formula), ")"),
                             y = "Residuals") +
 
-          ggplot2::geom_text(ggplot2::aes(label = f_outliers), na.rm = TRUE, nudge_x = 0.15, size = 3) +
+          ggplot2::geom_text(ggplot2::aes(label = outliers), na.rm = TRUE, nudge_x = 0.15, size = 3) +
 
           ggplot2::theme_classic() +
 
@@ -124,7 +123,7 @@ linreg <-
                             x = paste("Fitted values \nlinreg(", format(formula), ")"),
                             y = expression(sqrt("Standardized Residuals"))) +
 
-          ggplot2::geom_text(ggplot2::aes(label = g_outliers), na.rm = TRUE, nudge_x = 0.15, size = 3) +
+          ggplot2::geom_text(ggplot2::aes(label = outliers), na.rm = TRUE, nudge_x = 0.15, size = 3) +
 
           ggplot2::theme_classic() +
 

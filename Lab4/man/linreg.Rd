@@ -27,7 +27,7 @@ Linear Regression using ordinary least squares
 \describe{
 \item{\code{coef()}}{Return the regression coefficients as a named vector}
 
-\item{\code{is_outlier(x, limit)}}{Return TRUE if data point x is an outlier based on the specified limit}
+\item{\code{is_outlier(x)}}{Return TRUE if data point x is an outlier based on the 1.5 rule}
 
 \item{\code{plot()}}{Plot two graphs - Residuals vs Fitted graph and Scale-Location}
 
