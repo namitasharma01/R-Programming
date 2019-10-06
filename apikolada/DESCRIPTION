@@ -7,8 +7,8 @@ Author: c(person("Namita", "Sharma", email = "namsh440@student.liu.se", role = c
           person("Vyshnavi", "Pisupati", email = "vyspi394@student.liu.se", role = "aut"))
 Maintainer: Namita Sharma <namsh440@student.liu.se>, Vyshnavi Pisupati <vyspi394@student.liu.se>
 Description: This package interfaces with API Kolada to get the KPI (Key
-#'     Performance Indicator) data of different municipalities and
-#'     organizational unis and plot some graphs for further analysis.
+    Performance Indicator) data of different municipalities and
+    organizational unis and plot some graphs for further analysis.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

@@ -156,4 +156,3 @@ api.kolada <- setRefClass(
     }
   )
 )
-
