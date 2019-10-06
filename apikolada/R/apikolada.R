@@ -16,8 +16,6 @@
 #' obj$get.muni()
 #' obj$get.kpi.group()
 #' }
-#' @importFrom methods new setRefClass
-#' @importFrom gridExtra grid.arrange
 #' @export api.kolada
 
 # Class for processing data from kolada API
@@ -135,19 +133,17 @@ api.kolada <- setRefClass(
       muni.kpi.filter <- muni.kpi[which(muni.kpi$gender == gender), ]
 
       return(muni.kpi.filter)
+    },
+
+    plot.muni.kpi = function(kpigroup, muni, kpi, gender) {
+      "Plot KPI values of the municipality over the years"
+
+      muni.kpi.df <- get.muni.kpi(kpigroup, muni, kpi, gender)
+      scatter.smooth(x    = muni.kpi.df$period,
+                     y    = muni.kpi.df$value,
+                     xlab = "Period (in years)",
+                     ylab = kpi)
     }
   )
 )
 
-#' @name linreg_f
-#' @aliases linreg_f
-#' @title Linear Regression Function
-#' @description This function takes two arguments- formula and data,
-#'     and returns an object of class linreg which builds a linear
-#'     regression model
-#' @param formula formula (y ~ x)
-#' @param data dataframe
-#' @return An object of RC class linreg
-#' @usage linreg_f(formula, data)
-#' @examples linreg_f(formula = Petal.Length ~ Species, data = iris)
-#' @export linreg_f

@@ -1,0 +1,49 @@
+---
+title: "apikolada"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{apikolada}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteDepends{ggplot2, gridExtra}    
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+```{r setup}
+library(apikolada)
+```
+
+
+```{r, eval=TRUE}
+obj.kolada <- api.kolada$new()
+```
+
+
+```{r, eval=TRUE}
+muni <- obj.kolada$get.muni()
+head(muni)
+```
+
+
+```{r, eval=TRUE}
+ou <- obj.kolada$get.ou.muni("Stockholm")
+head(ou)
+```
+
+
+```{r, eval=TRUE}
+muni.kpi <- obj.kolada$get.muni.kpi("Befolkning", "Linköping", "Invånare 65-79 år, antal", "T")
+head(muni.kpi)
+```
+
+
+```{r, eval=TRUE}
+obj.kolada$plot.muni.kpi("Befolkning", "Linköping", "Invånare 65-79 år, antal", "T")
+```
