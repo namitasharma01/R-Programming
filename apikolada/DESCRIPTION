@@ -1,11 +1,14 @@
 Package: apikolada
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
+Title: Package to interface with API Kolada 
+Version: 1.0.0
+Date: 2019-10-06
+Author: c(person("Namita", "Sharma", email = "namsh440@student.liu.se", role = c("aut", "cre")),
+          person("Vyshnavi", "Pisupati", email = "vyspi394@student.liu.se", role = "aut"))
 Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: This package interfaces with API Kolada to get the KPI (Key
+#'     Performance Indicator) data of different municipalities and
+#'     organizational unis and plot some graphs for further analysis.
 License: MIT + file LICENSE
 Imports:
     httr,

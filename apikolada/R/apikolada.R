@@ -1,5 +1,5 @@
-#' Advanced Programming in R - Lab 4
-#' Linear Regression using ordinary least squares
+#' Advanced Programming in R - Lab 5
+#' Package to connect with the web API Kolada
 
 #' @name api.kolada
 #' @aliases api.kolada
@@ -14,7 +14,8 @@
 #' \dontrun{
 #' obj = api.kolada()
 #' obj$get.muni()
-#' obj$get.kpi.group()
+#' obj$get.ou.muni("Stockholm")
+#' obj$
 #' }
 #' @importFrom methods new setRefClass
 #' @export api.kolada
