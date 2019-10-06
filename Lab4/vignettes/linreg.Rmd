@@ -77,8 +77,3 @@ Prints out the regression `coefficients` with their `standard error`, `t-values`
 ```{r, eval=TRUE}
 linreg_mod$summary()
 ```
-
-
-```{r}
-
-```
