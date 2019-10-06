@@ -5,7 +5,7 @@ vignette: >
   %\VignetteIndexEntry{apikolada}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-  %\VignetteDepends{ggplot2, gridExtra}    
+  %\VignetteDepends{httr, jsonlite}    
 ---
 
 ```{r, include = FALSE}
