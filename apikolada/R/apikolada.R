@@ -1,5 +1,24 @@
+#' Advanced Programming in R - Lab 4
+#' Linear Regression using ordinary least squares
+
+#' @name api.kolada
+#' @aliases api.kolada
+#' @title Class to interface with API Kolada
+#' @description This class is implemented to interface with API Kolada and
+#'     get KPI (Key Performance Indicator) data of different municipalities
+#'     and organizational unis and plot some graphs for further analysis.
+#'     Please refer the methods section of documentation for information
+#'     on each method
+#' @return Returns a linear model built based on \code{formula} and \code{data}
+#' @examples
+#' \dontrun{
+#' obj = api.kolada()
+#' obj$get.muni()
+#' obj$get.kpi.group()
+#' }
+#' @importFrom methods new setRefClass
+#' @importFrom gridExtra grid.arrange
 #' @export api.kolada
-#'
 
 # Class for processing data from kolada API
 
@@ -9,9 +28,7 @@ api.kolada <- setRefClass(
   fields = list(
     muni.all        = "data.frame",
     ou.all          = "data.frame",
-    kpi.group.all   = "data.frame",
-    muni.kpi        = "data.frame",
-    muni.kpi.filter = "data.frame"
+    kpi.group.all   = "data.frame"
   ),
 
   methods = list(
@@ -19,8 +36,6 @@ api.kolada <- setRefClass(
       muni.all        <<- data.frame()
       ou.all          <<- data.frame()
       kpi.group.all   <<- data.frame()
-      muni.kpi        <<- data.frame()
-      muni.kpi.filter <<- data.frame()
     },
 
     getdata.api = function(url) {
@@ -116,10 +131,23 @@ api.kolada <- setRefClass(
                                                period = muni.kpi.nested[i, "period"])
         i <- i + 1
       }
-      muni.kpi   <<- do.call(what = rbind, args = muni.kpi.flat)
-      muni.kpi.filter <<- muni.kpi[which(muni.kpi$gender == gender), ]
+      muni.kpi   <- do.call(what = rbind, args = muni.kpi.flat)
+      muni.kpi.filter <- muni.kpi[which(muni.kpi$gender == gender), ]
 
       return(muni.kpi.filter)
     }
   )
 )
+
+#' @name linreg_f
+#' @aliases linreg_f
+#' @title Linear Regression Function
+#' @description This function takes two arguments- formula and data,
+#'     and returns an object of class linreg which builds a linear
+#'     regression model
+#' @param formula formula (y ~ x)
+#' @param data dataframe
+#' @return An object of RC class linreg
+#' @usage linreg_f(formula, data)
+#' @examples linreg_f(formula = Petal.Length ~ Species, data = iris)
+#' @export linreg_f
