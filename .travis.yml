@@ -12,3 +12,9 @@ install:
   - Rscript -e 'install.packages(c("devtools", "roxygen2", "testthat", "knitr", "rmarkdown", "ggplot2", "gridExtra"));devtools::install_deps("Lab4")'
 script:
   - Rscript -e 'devtools::check("Lab4")'
+
+#Lab5
+install:
+  - Rscript -e 'install.packages(c("devtools", "roxygen2", "testthat", "knitr", "rmarkdown", "httr", "jsonlite"));devtools::install_deps("apikolada")'
+script:
+  - Rscript -e 'devtools::check("apikolada")'
