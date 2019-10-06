@@ -38,6 +38,8 @@ Linear Regression using ordinary least squares
 \item{\code{get.ou.muni(muni)}}{Get all the organizational units in a municipality from API}
 
 \item{\code{getdata.api(url)}}{Get relevant data from API by passing the url}
+
+\item{\code{plot.muni.kpi(kpigroup, muni, kpi, gender)}}{Plot KPI values of the municipality over the years}
 }}
 
 \examples{

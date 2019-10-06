@@ -16,6 +16,7 @@
 #' obj$get.muni()
 #' obj$get.kpi.group()
 #' }
+#' @importFrom methods new setRefClass
 #' @export api.kolada
 
 # Class for processing data from kolada API
@@ -38,15 +39,23 @@ api.kolada <- setRefClass(
 
     getdata.api = function(url) {
       "Get relevant data from API by passing the url"
-      response    <- httr::GET(url = url)
-      raw.content <- rawToChar(response$content)
 
-      # Set encoding of the raw content to UTF-8 to preserve swedish characters in the data
-      Encoding(raw.content) <- "UTF-8"
+      tryCatch(
+        {
+          response    <- httr::GET(url = url)
+          raw.content <- rawToChar(response$content)
 
-      # Return data as a dataframe
-      content.df = (jsonlite::fromJSON(raw.content))$values
-      return(content.df)
+          # Set encoding of the raw content to UTF-8 to preserve swedish characters in the data
+          Encoding(raw.content) <- "UTF-8"
+
+          # Return data as a dataframe
+          content.df = (jsonlite::fromJSON(raw.content))$values
+          return(content.df)
+        },
+        error = function(e){
+          stop("Could not connect to API api.kolada.se.")
+        }
+      )
     },
 
     get.muni = function() {
