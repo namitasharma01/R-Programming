@@ -18,7 +18,7 @@
 #' obj$
 #' }
 #' @importFrom methods new setRefClass
-# @export api.kolada
+#' @export api.kolada
 
 # Class for processing data from kolada API
 
@@ -161,15 +161,15 @@ api.kolada <- setRefClass(
         error = function(e) {
           stop("Not enough values to plot a graph!")
         })
+    },
+
+    summary.kpi = function(kpi_df) {
+      "Summary statistics of municipality KPI values"
+
+      return(summary(kpi.df))
     }
   )
 )
-
-get.api.kolada <- function(){
-  obj.api.kolada <- api.kolada$new()
-  return(obj.api.kolada)
-}
-
 
 # 1. flatten out nested df
 # 2. try catch
