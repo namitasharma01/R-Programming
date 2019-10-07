@@ -4,6 +4,10 @@
 \name{api.kolada}
 \alias{api.kolada}
 \title{Class to interface with web API Kolada}
+\source{
+Details about the API and its database can be found at the kolada
+    API web page \url{https://www.kolada.se/index.php?_p=index/API}
+}
 \value{
 Returns the data from Kolada API and few summary and plot functions
 }

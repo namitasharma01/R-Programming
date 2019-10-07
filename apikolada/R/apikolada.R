@@ -20,6 +20,8 @@
 #' obj$plot.muni.kpi(muni.kpi$period, muni.kpi$kpi, "Invånare 65-79 år, antal")
 #' }
 #' @importFrom methods new setRefClass
+#' @source Details about the API and its database can be found at the kolada
+#'     API web page \url{https://www.kolada.se/index.php?_p=index/API}
 #' @export api.kolada
 
 
