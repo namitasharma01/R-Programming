@@ -150,7 +150,7 @@ api.kolada <- setRefClass(
           return(muni.kpi.filter)
         },
         error = function(e) {
-          message("Sorry! Data not available for the requested input from API")
+          stop("Sorry! Data not available for the requested input from API")
         })
     },
 
@@ -166,7 +166,7 @@ api.kolada <- setRefClass(
                          ylab = kpi_label)
         },
         error = function(e) {
-          warning("Not enough values to plot a graph!")
+          stop("Not enough values to plot a graph!")
         })
     },
 
