@@ -5,7 +5,7 @@
 \alias{api.kolada}
 \title{Class to interface with web API Kolada}
 \value{
-Returns the data from API and few summary and plot functions
+Returns the data from Kolada API and few summary and plot functions
 }
 \description{
 This class is implemented to interface with API Kolada and
@@ -25,7 +25,7 @@ Package to connect with the web API Kolada
 
 \item{\code{get.kpi.id(kpigroup, kpi)}}{Get the KPI ID for a given KPI title from API}
 
-\item{\code{get.kpi.member(kpigroup)}}{Get the KPI members for a selected KPI group}
+\item{\code{get.kpi.member(kpigroup)}}{Get the KPI indicators within the selected KPI group}
 
 \item{\code{get.muni()}}{Get all the municipality codes from API}
 
@@ -49,5 +49,8 @@ Package to connect with the web API Kolada
 obj = api.kolada()
 obj$get.muni()
 obj$get.ou.muni("Stockholm")
+obj$get.kpi.member("Befolkning")
+obj$get.muni.kpi("Befolkning", "LinkÃ¶ping", "InvÃ¥nare 65-79 Ã¥r, antal", "T")
+obj$plot.muni.kpi(muni.kpi$period, muni.kpi$kpi, "InvÃ¥nare 65-79 Ã¥r, antal")
 }
 }

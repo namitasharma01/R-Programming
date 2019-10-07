@@ -1,5 +1,5 @@
 ---
-title: "apikolada"
+title: "API Kolada"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{apikolada}
@@ -9,41 +9,82 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
+library(apikolada)
+
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
 ```
 
+This vignette describes the use of RC class **`api.kolada`** to interface with Kolada's web API. Kolada provides a web-service for accessing standardized key performance indicators (KPI) concerning Swedish municipalities and organizational units. More details about the API and its database can be found at the [kolada API web page](https://www.kolada.se/index.php?_p=index/API).
 
-```{r setup}
-library(apikolada)
-```
+## Class api.kolada()
 
+The implemented methods of the class can be used to access and analyze the KPI data of municipalities on kolada database.
 
+In the examples shown below, `obj.kolada` is a class object of type api.kolada(). 
 ```{r, eval=TRUE}
 obj.kolada <- api.kolada$new()
 ```
 
+### Method get.muni()
+
+Gets all the municipality codes from API.
 
 ```{r, eval=TRUE}
 muni <- obj.kolada$get.muni()
 head(muni)
 ```
 
+### Method get.ou.muni(muni)
+
+Gets all the organizational units in a municipality `muni` from API.
 
 ```{r, eval=TRUE}
 ou <- obj.kolada$get.ou.muni("Stockholm")
 head(ou)
 ```
 
+### Method get.kpi.group()
+
+Gets all KPI groups from API.
+
+```{r, eval=TRUE}
+kpi.group <- obj.kolada$get.kpi.group()
+head(kpi.group[,-2])
+```
+
+### Method get.kpi.member(kpigroup)
+
+Gets the KPI indicators within the selected KPI group `kpigroup`.
+
+```{r, eval=TRUE}
+kpi.members <- obj.kolada$get.kpi.member("Befolkning")
+head(kpi.members)
+```
+
+### Method get.muni.kpi(kpigroup, muni, kpi, gender)
+
+Gets the KPI data for a municipality `muni` based on the chosen KPI indicator `kpi` from API filtered on `gender`, if applicable.
 
 ```{r, eval=TRUE}
 muni.kpi <- obj.kolada$get.muni.kpi("Befolkning", "Linköping", "Invånare 65-79 år, antal", "T")
 head(muni.kpi)
 ```
 
+### Method plot.muni.kpi(period_val, kpi_val, kpi_label)
+
+Plots KPI values `kpi_val` of the municipality over the years `period_val` for the selected KPI indicator `kpi_label`.
 
 ```{r, eval=TRUE}
 obj.kolada$plot.muni.kpi(muni.kpi$period, muni.kpi$kpi, "Invånare 65-79 år, antal")
+```
+
+### Method summary.kpi(kpi_df)
+
+Gives the summary statistics of municipality KPI values `kpi_df`.
+
+```{r, eval=TRUE}
+obj.kolada$summary.kpi(muni.kpi)
 ```

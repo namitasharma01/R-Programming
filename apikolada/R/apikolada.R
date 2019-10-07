@@ -15,7 +15,9 @@
 #' obj = api.kolada()
 #' obj$get.muni()
 #' obj$get.ou.muni("Stockholm")
-#' obj$get.ou.muni("", "Stockholm", "", "T")
+#' obj$get.kpi.member("Befolkning")
+#' obj$get.muni.kpi("Befolkning", "Linköping", "Invånare 65-79 år, antal", "T")
+#' obj$plot.muni.kpi(muni.kpi$period, muni.kpi$kpi, "Invånare 65-79 år, antal")
 #' }
 #' @importFrom methods new setRefClass
 #' @export api.kolada
@@ -104,7 +106,7 @@ api.kolada <- setRefClass(
 
 
     get.kpi.member = function(kpigroup) {
-      "Get the KPI members for a selected KPI group"
+      "Get the KPI indicators within the selected KPI group"
 
       if (nrow(kpi.group.all) == 0) {
         kpi.group.all   <<- get.kpi.group()
