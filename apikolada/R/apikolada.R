@@ -9,12 +9,13 @@
 #'     and organizational unis and plot some graphs for further analysis.
 #'     Please refer the methods section of documentation for information
 #'     on each method
-#' @return Returns the data from API and few summary and plot functions
+#' @return Returns the data from Kolada API and few summary and plot functions
 #' @examples
 #' \dontrun{
 #' obj = api.kolada()
 #' obj$get.muni()
 #' obj$get.ou.muni("Stockholm")
+#' obj$get.ou.muni("", "Stockholm", "", "T")
 #' }
 #' @importFrom methods new setRefClass
 #' @export api.kolada
@@ -149,7 +150,7 @@ api.kolada <- setRefClass(
           return(muni.kpi.filter)
         },
         error = function(e) {
-          stop("Sorry! Data not available for the requested input from API")
+          message("Sorry! Data not available for the requested input from API")
         })
     },
 
@@ -165,7 +166,7 @@ api.kolada <- setRefClass(
                          ylab = kpi_label)
         },
         error = function(e) {
-          stop("Not enough values to plot a graph!")
+          warning("Not enough values to plot a graph!")
         })
     },
 
