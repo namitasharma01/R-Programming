@@ -18,7 +18,7 @@
 #' obj$
 #' }
 #' @importFrom methods new setRefClass
-# @export api.kolada
+#' @export api.kolada
 
 # Class for processing data from kolada API
 
@@ -170,12 +170,6 @@ api.kolada <- setRefClass(
     }
   )
 )
-
-get.api.kolada <- function(){
-  obj.api.kolada <- api.kolada$new()
-  return(obj.api.kolada)
-}
-
 
 # 1. flatten out nested df
 # 2. try catch
