@@ -3,7 +3,7 @@
 
 #' @name api.kolada
 #' @aliases api.kolada
-#' @title Class to interface with API Kolada
+#' @title Class to interface with web API Kolada
 #' @description This class is implemented to interface with API Kolada and
 #'     get KPI (Key Performance Indicator) data of different municipalities
 #'     and organizational unis and plot some graphs for further analysis.
@@ -15,7 +15,6 @@
 #' obj = api.kolada()
 #' obj$get.muni()
 #' obj$get.ou.muni("Stockholm")
-#' obj$
 #' }
 #' @importFrom methods new setRefClass
 #' @export api.kolada
@@ -145,8 +144,8 @@ api.kolada <- setRefClass(
                                                    period = muni.kpi.nested[i, "period"])
             i <- i + 1
           }
-          muni.kpi   <- do.call(what = rbind, args = muni.kpi.flat)
-          muni.kpi.filter <- muni.kpi[which(muni.kpi$gender == gender), ]
+          muni.kpi   <<- do.call(what = rbind, args = muni.kpi.flat)
+          muni.kpi.filter <<- muni.kpi[which(muni.kpi$gender == gender), ]
           return(muni.kpi.filter)
         },
         error = function(e) {

@@ -3,9 +3,9 @@
 \docType{class}
 \name{api.kolada}
 \alias{api.kolada}
-\title{Class to interface with API Kolada}
+\title{Class to interface with web API Kolada}
 \value{
-Returns a linear model built based on \code{formula} and \code{data}
+Returns the data from API and few summary and plot functions
 }
 \description{
 This class is implemented to interface with API Kolada and
@@ -15,8 +15,8 @@ This class is implemented to interface with API Kolada and
     on each method
 }
 \details{
-Advanced Programming in R - Lab 4
-Linear Regression using ordinary least squares
+Advanced Programming in R - Lab 5
+Package to connect with the web API Kolada
 }
 \section{Methods}{
 
@@ -39,13 +39,15 @@ Linear Regression using ordinary least squares
 
 \item{\code{getdata.api(url)}}{Get relevant data from API by passing the url}
 
-\item{\code{plot.muni.kpi(kpigroup, muni, kpi, gender)}}{Plot KPI values of the municipality over the years}
+\item{\code{plot.muni.kpi(period_val, kpi_val, kpi_label)}}{Plot KPI values of the municipality over the years}
+
+\item{\code{summary.kpi(kpi_df)}}{Summary statistics of municipality KPI values}
 }}
 
 \examples{
 \dontrun{
 obj = api.kolada()
 obj$get.muni()
-obj$get.kpi.group()
+obj$get.ou.muni("Stockholm")
 }
 }
