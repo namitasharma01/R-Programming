@@ -9,7 +9,7 @@
 #'     and organizational unis and plot some graphs for further analysis.
 #'     Please refer the methods section of documentation for information
 #'     on each method
-#' @return Returns a linear model built based on \code{formula} and \code{data}
+#' @return Returns the data from API and few summary and plot functions
 #' @examples
 #' \dontrun{
 #' obj = api.kolada()
@@ -18,7 +18,7 @@
 #' obj$
 #' }
 #' @importFrom methods new setRefClass
-#' @export api.kolada
+# @export api.kolada
 
 # Class for processing data from kolada API
 
@@ -28,7 +28,9 @@ api.kolada <- setRefClass(
   fields = list(
     muni.all        = "data.frame",
     ou.all          = "data.frame",
-    kpi.group.all   = "data.frame"
+    kpi.group.all   = "data.frame",
+    muni.kpi        = "data.frame",
+    muni.kpi.filter = "data.frame"
   ),
 
   methods = list(
@@ -36,27 +38,22 @@ api.kolada <- setRefClass(
       muni.all        <<- data.frame()
       ou.all          <<- data.frame()
       kpi.group.all   <<- data.frame()
+      muni.kpi        <<- data.frame()
+      muni.kpi.filter <<- data.frame()
     },
 
     getdata.api = function(url) {
       "Get relevant data from API by passing the url"
 
-      tryCatch(
-        {
-          response    <- httr::GET(url = url)
-          raw.content <- rawToChar(response$content)
+      response    <- httr::GET(url = url)
+      raw.content <- rawToChar(response$content)
 
-          # Set encoding of the raw content to UTF-8 to preserve swedish characters in the data
-          Encoding(raw.content) <- "UTF-8"
+      # Set encoding of the raw content to UTF-8 to preserve swedish characters in the data
+      Encoding(raw.content) <- "UTF-8"
 
-          # Return data as a dataframe
-          content.df = (jsonlite::fromJSON(raw.content))$values
-          return(content.df)
-        },
-        error = function(e){
-          stop("Could not connect to API api.kolada.se.")
-        }
-      )
+      # Return data as a dataframe
+      content.df = (jsonlite::fromJSON(raw.content))$values
+      return(content.df)
     },
 
     get.muni = function() {
@@ -122,37 +119,57 @@ api.kolada <- setRefClass(
     get.muni.kpi = function(kpigroup, muni, kpi, gender) {
       "Get KPI data for a municipality based on the chosen KPI indicator from API"
 
-      # Build a URL to get municipality data for KPI indicator chosen
-      url <- paste0("http://api.kolada.se/v2/data/kpi/", get.kpi.id(kpigroup, kpi),
-                    "/municipality/", get.muni.id(muni))
+      tryCatch(
+        {
+          # Build a URL to get municipality data for KPI indicator chosen
+          url <- paste0("http://api.kolada.se/v2/data/kpi/", get.kpi.id(kpigroup, kpi),
+                        "/municipality/", get.muni.id(muni))
 
-      # Get KPI data for a municipality based on the chosen KPI indicator from API
-      muni.kpi.nested <- getdata.api(url)
+          # Get KPI data for a municipality based on the chosen KPI indicator from API
+          muni.kpi.nested <- getdata.api(url)
 
-      # Flatten out the nested dataframe having KPI values along with its period data
-      i <- 1
-      muni.kpi.flat <- list()
-      for (x in muni.kpi.nested$values){
-        muni.kpi.flat[[i]] <- cbind.data.frame(count  = x$count,
-                                               gender = x$gender,
-                                               value  = x$value,
-                                               period = muni.kpi.nested[i, "period"])
-        i <- i + 1
-      }
-      muni.kpi   <- do.call(what = rbind, args = muni.kpi.flat)
-      muni.kpi.filter <- muni.kpi[which(muni.kpi$gender == gender), ]
+          # Flatten out the nested dataframe having KPI values along with its period data
+          i <- 1
+          muni.kpi.flat <- list()
+          for (x in muni.kpi.nested$values){
+            muni.kpi.flat[[i]] <- cbind.data.frame(count  = x$count,
+                                                   gender = x$gender,
+                                                   value  = x$value,
+                                                   period = muni.kpi.nested[i, "period"])
+            i <- i + 1
+          }
+          muni.kpi   <- do.call(what = rbind, args = muni.kpi.flat)
+          muni.kpi.filter <- muni.kpi[which(muni.kpi$gender == gender), ]
 
-      return(muni.kpi.filter)
+          return(muni.kpi.filter)
+        },
+        error = function(e) {
+          stop("Sorry! Data not available for the requested input from API")
+        })
     },
 
-    plot.muni.kpi = function(kpigroup, muni, kpi, gender) {
+    plot.muni.kpi = function(period_val, kpi_val, kpi_label) {
       "Plot KPI values of the municipality over the years"
 
-      muni.kpi.df <- get.muni.kpi(kpigroup, muni, kpi, gender)
-      scatter.smooth(x    = muni.kpi.df$period,
-                     y    = muni.kpi.df$value,
-                     xlab = "Period (in years)",
-                     ylab = kpi)
+      tryCatch(
+        {
+          scatter.smooth(x    = period_val,
+                         y    = kpi_val,
+                         xlab = "Period (in years)",
+                         ylab = kpi_label)
+        },
+        error = function(e) {
+          stop("Not enough values to plot a graph!")
+        })
     }
   )
 )
+
+get.api.kolada <- function(){
+  obj.api.kolada <- api.kolada$new()
+  return(obj.api.kolada)
+}
+
+
+# 1. flatten out nested df
+# 2. try catch

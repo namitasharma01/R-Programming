@@ -45,5 +45,5 @@ head(muni.kpi)
 
 
 ```{r, eval=TRUE}
-obj.kolada$plot.muni.kpi("Befolkning", "Linköping", "Invånare 65-79 år, antal", "T")
+obj.kolada$plot.muni.kpi(muni.kpi$period, muni.kpi$kpi, "Invånare 65-79 år, antal")
 ```
