@@ -172,7 +172,7 @@ api.kolada <- setRefClass(
 
     summary.kpi = function(kpi_df) {
       "Summary statistics of municipality KPI values"
-      return(summary(kpi.df))
+      return(summary(kpi_df))
     }
   )
 )
