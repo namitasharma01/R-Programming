@@ -20,14 +20,5 @@ test_that("get.ou.muni() method works", {
   expect_equal(head(obj.api.kolada$get.ou.muni("Stockholm")), expected.df)
 })
 
-test_that("get.muni.kpi() method works", {
-  obj.api.kolada <- apikolada::api.kolada$new()
 
-  expected.df <- data.frame("id"           = c("V15E018000101", "V15E018000201", "V15E018000301", "V15E018000308", "V15E018000401", "V15E018000801"),
-                            "municipality" = c("0180", "0180", "0180", "0180", "0180", "0180"),
-                            "title"        = c("Abrahamsbergsskolan", "Aspuddens skola", "Bagarmossens skola", "Brotorpsskolan", "Gullingeskolan", "Bäckahagens skola"),
-                            stringsAsFactors = FALSE)
-
-  expect_equal(head(obj.api.kolada$get.ou.muni("Stockholm")), expected.df)
-})
 
