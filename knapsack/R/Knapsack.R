@@ -1,30 +1,41 @@
 
 brute_force_knapsack <- function(x, W) {
-    n <- nrow(x)
-    brute_force = list(value    = 0,
-                       elements = integer(n))
+  if (any(x < 0) ||
+      any(names(x) %in% c("w", "v") == FALSE) ||
+      W < 0) {
+    stop("Invalid inputs!")
+  }
 
-    # Consider all possible combinations of n elements that can be
-    # put in the knapsack
-    for (i in 1:((2 ^ n) - 1)) {
-      binary_i <- intToBits(i)
-      elements <- which(binary_i == 01)
+  n <- nrow(x)
+  brute_force = list(value    = 0,
+                     elements = integer(n))
 
-      v_tot <- sum(x[elements, "v"])
-      w_tot <- sum(x[elements, "w"])
+  # Consider all possible combinations of n elements that can be
+  # put in the knapsack
+  for (i in 1:((2 ^ n) - 1)) {
+    binary_i <- intToBits(i)
+    elements <- which(binary_i == 01)
 
-      # Store the combination of elements with the highest total value
-      # with total weight less than or equal to knapsack capacity
-      if (v_tot > brute_force$value && w_tot <= W) {
-        brute_force$value    <- v_tot
-        brute_force$elements <- elements
-      }
+    v_tot <- sum(x[elements, "v"])
+    w_tot <- sum(x[elements, "w"])
+
+    # Store the combination of elements with the highest total value
+    # with total weight less than or equal to knapsack capacity
+    if (v_tot > brute_force$value && w_tot <= W) {
+      brute_force$value    <- v_tot
+      brute_force$elements <- elements
     }
-    return(brute_force)
+  }
+  return(brute_force)
 }
 
 
 knapsack_dynamic = function(x, W) {
+  if (any(x < 0) ||
+      any(names(x) %in% c("w", "v") == FALSE) ||
+      W < 0) {
+    stop("Invalid inputs!")
+  }
 
   n <- nrow(x)
   m <- matrix(data = -1,
@@ -83,11 +94,15 @@ knapsack_dynamic = function(x, W) {
   return(knapsack)
 }
 
-
 greedy_knapsack <- function(x, W) {
+  if (any(x < 0) ||
+      any(names(x) %in% c("w", "v") == FALSE) ||
+      W < 0) {
+    stop("Invalid inputs!")
+  }
 
   greedy = list(value    = 0,
-                elements = integer(n))
+                elements = integer())
   i<- 1
   w_tot <- 0
 
