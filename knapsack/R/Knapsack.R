@@ -111,36 +111,3 @@ greedy_knapsack <- function(x, W) {
 
   return(greedy)
 }
-
-dynamic_knapsack2<-function(x,W){
-  r<-nrow(x)
-  t<-W+1
-  m<-matrix(data=0,nrow=r,ncol=t)
-  output_list<-list("Value"=0,"elements"=c())
-  v<-sort(x$v)
-  w<-sort(x$w)
-  for(i in 2:r){
-    for(j in 1:t){
-      if(w[i]>j){
-        m[i,j]<-m[i-1,j]
-      }
-      else{
-        m[i, j]<- pmax(m[i-1,j], m[i-1, j-w[i-1]] + v[i-1])
-      }
-    }
-  }
-  output_list$Value<-m[r,t]
-  res<-m[r,t]
-  k<-1
-  y=r
-  while(y>0&&res>0){
-    if(res!=m[y-1,t]){
-      output_list$elements[k]<-which(x$w==w[y-1])
-      res<-res-v[y-1]
-      t<-t-w[y-1]
-      k<-k+1
-      y<-y-1
-    }
-  }
-  return(m)
-}
