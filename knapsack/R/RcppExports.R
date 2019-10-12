@@ -10,6 +10,6 @@
 #'         2. elements - the list of elements that can be included in the knapsack
 #' @export
 dynamic_knapsack_cpp <- function(x, W) {
-    .Call('_knapsack_dynamic_knapsack_cpp', PACKAGE = 'knapsack', x, W)
+    .Call(`_knapsack_dynamic_knapsack_cpp`, x, W)
 }
 

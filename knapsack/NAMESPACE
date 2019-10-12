@@ -3,4 +3,7 @@
 export(brute_force_knapsack)
 export(dynamic_knapsack)
 export(dynamic_knapsack_cpp)
+export(dynamic_knapsack_r)
 export(greedy_knapsack)
+importFrom(Rcpp,sourceCpp)
+useDynLib(knapsack, .registration = TRUE)

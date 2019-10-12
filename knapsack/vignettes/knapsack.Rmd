@@ -16,7 +16,115 @@ knitr::opts_chunk$set(
 )
 ```
 
+# Knapsack Problem
+
+The **knapsack problem** or *rucksack problem* is a problem in combinatorial optimization: Given a set of items, each with a weight and a value, determine the number of each item to include in a collection so that the total weight is less than or equal to a given limit and the total value is as large as possible. It derives its name from the problem faced by someone who is constrained by a fixed-size knapsack and must fill it with the most valuable items ([wikipedia](https://en.wikipedia.org/wiki/Knapsack_problem)).
+
+For the example set of items below, the time complexities of three different 
+algorithms available in this package are described in this vignette.
+
+```{r, setup, eval = TRUE, warning = FALSE}
+RNGkind(sample.kind = "Rounding")
+set.seed(42)
+n <- 1000000
+knapsack_objects <- data.frame(
+  w=sample(1:4000, size = n, replace = TRUE),
+  v=runif(n = n, 0, 10000)
+)
+```
+
+## Brute Force Algorithm
+
+This approach finds the exact optimimum solution by comparing each of the possible outcomes and has high computational complexity (exponential). 
+
+```{r, eval = TRUE}
+brute_force_knapsack(x = knapsack_objects[1:16, ], W = 3500)
+```
+
+The **mean** time taken by this algorithm for a size `n = 20` over 5 run times is **50.39402** seconds.
+
+```{r, eval = FALSE}
+microbenchmark(brute_force_knapsack(x = knapsack_objects[1:20, ], W = 3500), times = 5)
+#> Unit: seconds
+#>                                                          expr     min       lq
+#>  brute_force_knapsack(x = knapsack_objects[1:20, ], W = 3500) 39.7771 40.19291
+#>     mean   median       uq      max neval
+#> 50.39402 51.60901 56.29491 64.09618     5
+```
+
+## Brute Force using parallelization 
+
+Parallelization has been implemented for the brute force algorithm to compare the improvement in its speed and can be invoke by setting the argument `parallel` to `TRUE.`
+
+```{r eval = FALSE}
+brute_force_knapsack(x = knapsack_objects[1:16, ], W = 3500, parallel = TRUE)
+```
+
+The **mean** running time for the same sample size `n = 20` is reduced to **37.0429** seconds. 
+
+```{r eval = FALSE}
+microbenchmark(brute_force_knapsack(x = knapsack_objects[1:20, ], W = 3500, parallel = TRUE), times = 5)
+#> Unit: seconds
+#>                                                                                expr
+#>  brute_force_knapsack(x = knapsack_objects[1:20, ], W = 3500,      parallel = TRUE)
+#>       min      lq    mean   median       uq      max neval
+#>  33.28078 36.0073 37.0429 36.98888 38.00676 40.93077     5
+
+```
+
+## Dynamic Programming 
+
+This approach finds the exact optimimum solution by building an optimization matrix and has lower complexity than the brute force algorithm. 
 
 ```{r, eval=TRUE}
+dynamic_knapsack(x = knapsack_objects[1:16, ], W = 2000)
+```
 
+The **mean** time taken for sample size `n = 500` is **42.49771** seconds.
+
+```{r, eval=FALSE}
+microbenchmark(dynamic_knapsack(x = knapsack_objects[1:500, ], W = 2000), times = 5)
+#> Unit: seconds
+#>                                                       expr      min      lq
+#>  dynamic_knapsack(x = knapsack_objects[1:500, ], W = 2000) 38.79911 39.1092
+#>      mean   median       uq      max neval
+#>  42.49771 43.05286 45.06696 46.46042     5
+```
+
+## Dynamic programming using Rcpp
+
+The speed of dynamic progamming algorithm is further improved by implementing it in Rcpp.
+
+```{r, eval=TRUE}
+dynamic_knapsack(x = knapsack_objects[1:16, ], W = 2000, fast = TRUE)
+```
+
+The **mean** time taken for sample size `n = 500` is significantly reduced to **11.89892** milliseconds.
+
+```{r, eval=FALSE}
+microbenchmark(dynamic_knapsack(x = knapsack_objects[1:500, ], W = 2000, fast = TRUE), times = 5)
+#> Unit: milliseconds
+#>                                                                    expr    min
+#>  dynamic_knapsack(x = knapsack_objects[1:500, ], W = 2000, fast = TRUE) 9.7806
+#>      lq     mean  median      uq     max neval
+#>  9.8389 11.89892 12.7367 13.4781 13.6603     5
+```
+
+## Greedy Heuristics
+
+Greedy approach is an approximation algorithm that trades the accuracy of optimization in return for a significant gain in speed of computation.
+
+```{r, eval=TRUE}
+greedy_knapsack(x = knapsack_objects[1:1000, ], W = 3500)
+```
+
+The **mean** running time for a sample size as large as `n = 1000000` can be seen to in the order of milliseconds **277.6935**.
+
+```{r, eval=FALSE}
+microbenchmark(greedy_knapsack(x = knapsack_objects[1:1000000, ], W = 3500), times = 5)
+#> Unit: milliseconds
+#>                                                        expr      min       lq
+#>  greedy_knapsack(x = knapsack_objects[1:1e+06, ], W = 3500) 185.9174 210.6639
+#>      mean  median      uq     max neval
+#>  277.6935 315.801 323.713 352.372     5
 ```

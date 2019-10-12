@@ -21,7 +21,13 @@
 #'   dynamic_knapsack(x = knapsack_objects[1:12, ], W = 3500, fast = TRUE)
 #' }
 #' @source /url{"https://en.wikipedia.org/wiki/Knapsack_problem#0.2F1_knapsack_problem"}
+#' @useDynLib knapsack, .registration = TRUE
+#' @importFrom Rcpp sourceCpp
 #' @export
+
+# NOTE
+# The time taken by dynamic programming algorithm for n = 500 is 31.93758
+# seconds in R and 9.2401 milliseconds in Rcpp
 
 dynamic_knapsack = function(x, W, fast = FALSE) {
   if (any(x < 0) ||
@@ -32,14 +38,24 @@ dynamic_knapsack = function(x, W, fast = FALSE) {
 
   if (fast == TRUE) {
     # Implement Dynamic programming in C++
-    knapsack <- dynamic_knapsack_cpp(x = x, W = W)
+    knapsack <- knapsack::dynamic_knapsack_cpp(x = x, W = W)
+    knapsack$elements <- knapsack$elements[which(knapsack$elements != 0)]
 
   } else {
     # Implement Dynamic programming in R
-    knapsack <- dynamic_knapsack_r(x = x, W = W)
+    knapsack <- knapsack::dynamic_knapsack_r(x = x, W = W)
   }
   return(knapsack)
 }
+
+#' R implementation of dynamic programming for knapsack problem
+#'
+#' @param x Dataframe
+#' @param W Numeric scalar
+#' @return List with two elements:
+#'         1. value - optimum value that can be included in the knapsack
+#'         2. elements - the list of elements that can be included in the knapsack
+#' @export
 
 dynamic_knapsack_r <- function(x, W) {
   # Function output- optimum value and list of elements

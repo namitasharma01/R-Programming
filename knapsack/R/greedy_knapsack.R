@@ -17,6 +17,9 @@
 #' @source \url{"https://en.wikipedia.org/wiki/Knapsack_problem#Greedy_approximation_algorithm"}
 #' @export
 
+# NOTE
+# The time taken by greedy algorithm for n = 1000000 is 201.9903 milliseconds
+
 greedy_knapsack <- function(x, W) {
   if (any(x < 0) ||
       any(names(x) %in% c("w", "v") == FALSE) ||

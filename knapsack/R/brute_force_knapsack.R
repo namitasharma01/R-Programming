@@ -22,6 +22,9 @@
 #' }
 #' @export
 
+# NOTE
+# The time taken by brute force algorithm for n = 16 is 2.31187 seconds
+
 brute_force_knapsack <- function(x, W, parallel = FALSE) {
   if (any(x < 0) ||
       any(names(x) %in% c("w", "v") == FALSE) ||
@@ -62,7 +65,7 @@ brute_force_knapsack <- function(x, W, parallel = FALSE) {
     parallel::stopCluster(cl = clusters)
 
     brute_force$value    <- max(values[which(weights <= W)])
-    brute_force$elements <- elements[which(values == brute_force$value)]
+    brute_force$elements <- elements[[which(values == brute_force$value)]]
 
   } else {
     # Consider all possible combinations of n elements that can be

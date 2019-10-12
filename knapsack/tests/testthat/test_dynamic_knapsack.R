@@ -39,9 +39,6 @@ test_that("Function return correct results.", {
   st <- system.time(dk <- greedy_knapsack(x = knapsack_objects[1:16,], W = 2000))
   expect_true(as.numeric(st)[2] <= 0.01)
 
-  #dk <- dynamic_knapsack(x = knapsack_objects[1:800,], W = 3500)
-  #expect_equal(round(dk$value), 195283)
-
-  #dk <- dynamic_knapsack(x = knapsack_objects[1:1200,], W = 3500)
-  #expect_equal(round(dk$value), 276034)
+  dk <- dynamic_knapsack(x = knapsack_objects[1:100,], W = 3500)
+  expect_equal(round(dk$value), 68461)
 })
