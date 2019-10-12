@@ -40,5 +40,5 @@ test_that("Function return correct results.", {
   expect_true(as.numeric(st)[2] <= 0.01)
 
   dk <- dynamic_knapsack(x = knapsack_objects[1:100,], W = 2000)
-  expect_equal(round(dk$value), 68461)
+  expect_equal(round(dk$value), 59284)
 })
