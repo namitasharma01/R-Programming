@@ -18,3 +18,9 @@ install:
   - Rscript -e 'install.packages(c("devtools", "roxygen2", "testthat", "knitr", "rmarkdown", "httr", "jsonlite"));devtools::install_deps("apikolada")'
 script:
   - Rscript -e 'devtools::check("apikolada")'
+
+#Lab6
+install:
+  - Rscript -e 'install.packages(c("devtools", "roxygen2", "testthat", "knitr", "rmarkdown", "Rcpp"));devtools::install_deps("knapsack")'
+script:
+  - Rscript -e 'devtools::check("knapsack")'
