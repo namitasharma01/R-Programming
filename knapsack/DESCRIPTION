@@ -1,14 +1,20 @@
 Package: knapsack
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Title: Knapsack algorithms- Brute Force, Dynamic Programming and Greedy Heuristics
+Version: 1.0.0
+Date: 2019-10-12
+Authors@R: c(person("Namita", "Sharma", email = "namsh440@student.liu.se", role = c("aut", "cre")),
+             person("Vyshnavi", "Pisupati", email = "vyspi394@student.liu.se", role = "aut"))
+Maintainer: Namita Sharma <namsh440@student.liu.se>, Vyshnavi Pisupati <vyspi394@student.liu.se>
+Description: This package contains three different implementations of the knapsack 
+    problem- brute force search, dynamic programming and greedy heuristics to 
+    calculate the optimum value given a fixed weight from a set of elements. Comparisons
+    are drawn between the speed and computational complexity of the algorithms. Please
+    refer the package vignette for details.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+Depends: R (>= 2.10)
 Suggests: 
     testthat
 RoxygenNote: 6.1.1

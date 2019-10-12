@@ -2,6 +2,7 @@
 context("brute_force_knapsack")
 
 suppressWarnings(RNGversion("3.5.9"))
+RNGkind(sample.kind = "Rounding")
 set.seed(42)
 n <- 2000
 knapsack_objects <- data.frame(
