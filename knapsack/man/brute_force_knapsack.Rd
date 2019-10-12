@@ -31,4 +31,7 @@ technique to improve the speed of the algorithm
 }
 \examples{
 brute_force_knapsack(x = knapsack_objects[1:12, ], W = 3500)
+\dontrun{
+  brute_force_knapsack(x = knapsack_objects[1:12, ], W = 3500, parallel = TRUE)
+}
 }

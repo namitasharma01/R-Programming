@@ -1,6 +1,14 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
+//' Rcpp implementation of dynamic programming for knapsack problem
+//'
+//' @param x Dataframe
+//' @param W Numeric scalar
+//' @return List with two elements:
+//'         1. value - optimum value that can be included in the knapsack
+//'         2. elements - the list of elements that can be included in the knapsack
+//' @export
 // [[Rcpp::export]]
 List dynamic_knapsack_cpp(DataFrame x, int W) {
 

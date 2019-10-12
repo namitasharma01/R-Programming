@@ -2,37 +2,53 @@
 #' Knapsack Problem - Dynamic Programming Algorithm. This approach finds the exact
 #' optimimum solution by building an optimization matrix and has lower complexity
 #' than the brute force algorithm. The speed of this algorithm is further improved
-#' by implementing it in Rcpp. (Refer function dynamic_knapsack_cpp)
+#' by implementing it in Rcpp
 #'
 #' @name dynamic_knapsack
 #' @aliases dynamic_knapsack
 #' @title Dynamic Programming Algorithm
 #' @description This function finds the optimum value for the knapsack problem.
+#'              An Rcpp implementation can be called by setting fast as TRUE.
 #' @param x Dataframe
 #' @param W Numeric scalar
+#' @param fast Logical scalar
 #' @return List with two elements:
 #'         1. value - optimum value that can be included in the knapsack
 #'         2. elements - the list of elements that can be included in the knapsack
-#' @usage dynamic_knapsack(x, W)
+#' @usage dynamic_knapsack(x, W, fast = FALSE)
 #' @examples dynamic_knapsack(x = knapsack_objects[1:12, ], W = 3500)
+#' \dontrun{
+#'   dynamic_knapsack(x = knapsack_objects[1:12, ], W = 3500, fast = TRUE)
+#' }
 #' @source /url{"https://en.wikipedia.org/wiki/Knapsack_problem#0.2F1_knapsack_problem"}
 #' @export
 
-dynamic_knapsack = function(x, W) {
+dynamic_knapsack = function(x, W, fast = FALSE) {
   if (any(x < 0) ||
       any(names(x) %in% c("w", "v") == FALSE) ||
       W < 0) {
     stop("Invalid inputs!")
   }
 
+  if (fast == TRUE) {
+    # Implement Dynamic programming in C++
+    knapsack <- dynamic_knapsack_cpp(x = x, W = W)
+
+  } else {
+    # Implement Dynamic programming in R
+    knapsack <- dynamic_knapsack_r(x = x, W = W)
+  }
+  return(knapsack)
+}
+
+dynamic_knapsack_r <- function(x, W) {
+  # Function output- optimum value and list of elements
+  knapsack = list(value    = 0,
+                  elements = integer())
   n <- nrow(x)
   m <- matrix(data = -1,
               nrow = n,
               ncol = W)
-
-  # Function output- optimum value and list of elements
-  knapsack = list(value    = 0,
-                  elements = integer())
 
   # For the first row in matrix m, we can calculate optimum value based
   # only on the first element- by including it for knapsack capacities

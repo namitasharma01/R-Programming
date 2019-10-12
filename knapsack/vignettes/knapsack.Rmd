@@ -1,0 +1,22 @@
+---
+title: "knapsack"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{knapsack}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+library(knapsack)
+
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+```{r, eval=TRUE}
+
+```

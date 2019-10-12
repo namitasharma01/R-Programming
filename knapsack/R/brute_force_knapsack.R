@@ -17,6 +17,9 @@
 #'         2. elements - the list of elements that can be included in the knapsack
 #' @usage brute_force_knapsack(x, W, parallel)
 #' @examples brute_force_knapsack(x = knapsack_objects[1:12, ], W = 3500)
+#' \dontrun{
+#'   brute_force_knapsack(x = knapsack_objects[1:12, ], W = 3500, parallel = TRUE)
+#' }
 #' @export
 
 brute_force_knapsack <- function(x, W, parallel = FALSE) {

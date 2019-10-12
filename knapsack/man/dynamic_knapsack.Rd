@@ -7,12 +7,14 @@
 /url{"https://en.wikipedia.org/wiki/Knapsack_problem#0.2F1_knapsack_problem"}
 }
 \usage{
-dynamic_knapsack(x, W)
+dynamic_knapsack(x, W, fast = FALSE)
 }
 \arguments{
 \item{x}{Dataframe}
 
 \item{W}{Numeric scalar}
+
+\item{fast}{Logical scalar}
 }
 \value{
 List with two elements:
@@ -21,14 +23,18 @@ List with two elements:
 }
 \description{
 This function finds the optimum value for the knapsack problem.
+             An Rcpp implementation can be called by setting fast as TRUE.
 }
 \details{
 Advanced Programming in R - Lab 6
 Knapsack Problem - Dynamic Programming Algorithm. This approach finds the exact
 optimimum solution by building an optimization matrix and has lower complexity
 than the brute force algorithm. The speed of this algorithm is further improved
-by implementing it in Rcpp. (Refer function dynamic_knapsack_cpp)
+by implementing it in Rcpp
 }
 \examples{
 dynamic_knapsack(x = knapsack_objects[1:12, ], W = 3500)
+\dontrun{
+  dynamic_knapsack(x = knapsack_objects[1:12, ], W = 3500, fast = TRUE)
+}
 }
