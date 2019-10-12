@@ -21,7 +21,7 @@
 #'   dynamic_knapsack(x = knapsack_objects[1:12, ], W = 3500, fast = TRUE)
 #' }
 #' @source /url{"https://en.wikipedia.org/wiki/Knapsack_problem#0.2F1_knapsack_problem"}
-#' @useDynLib knapsack
+#' @useDynLib knapsack, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
 #' @export
 
