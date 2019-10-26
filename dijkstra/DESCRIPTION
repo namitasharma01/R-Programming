@@ -1,4 +1,4 @@
-Package: Lab3
+Package: dijkstra
 Type: Package
 Title: Functions for Euclidean and Dijkstra Algorithms
 Version: 1.0.0

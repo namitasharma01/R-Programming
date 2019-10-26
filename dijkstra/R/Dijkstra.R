@@ -43,22 +43,22 @@ dijkstra <- function(graph, init_node) {
   i <- 1
   while (length(vertex_Q) != 0) {
     # Select a vertex in Q with minimum distance in dist
-    u <- vertex_Q[names(dist[which(dist == min(dist[names(vertex_Q)]))])]
+    u <- vertex_Q[names(dist[dist == min(dist[names(vertex_Q)])])]
     
     # Remove vertex u from Q
     vertex_Q <- vertex_Q[-which(vertex_Q == u)]
     
     for (v in vertex_Q) {
       # Neighbours of vertex u that are still in Q and their distance from u
-      neighbour <- graph[which(graph[["v1"]] == u), c("v2", "w")]
+      neighbour <- graph[graph[["v1"]] == u, c("v2", "w")]
       
       if (any(neighbour[["v2"]] == v)) {
         # Alternate distance to vertex v
-        alt <- dist[names(u)] + neighbour[which(neighbour[["v2"]] == v), "w"]
+        alt <- dist[names(u)] + neighbour[neighbour[["v2"]] == v, "w"]
         
-        if( alt < dist[names(vertex_Q[which(vertex_Q == v)])]) {
+        if (alt < dist[names(vertex_Q[vertex_Q == v])]) {
           # Replace distance for vertex v in dist if alt is shorter than distance in dist
-          dist[names(vertex_Q[which(vertex_Q == v)])] <- alt
+          dist[names(vertex_Q[vertex_Q == v])] <- alt
         }
       }
     }
