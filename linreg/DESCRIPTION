@@ -1,4 +1,4 @@
-Package: Lab4
+Package: linreg
 Type: Package
 Title: Linear Regression Model
 Version: 1.0.0

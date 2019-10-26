@@ -9,7 +9,7 @@ vignette: >
 ---
 
 ```{r setup, eval=TRUE, include = FALSE}
-library(Lab4)
+library(linreg)
 
 knitr::opts_chunk$set(
   collapse = TRUE,
