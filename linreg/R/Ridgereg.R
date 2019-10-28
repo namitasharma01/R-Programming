@@ -153,10 +153,10 @@ visualize_airport_delays <- function() {
   f <- ggplot2::ggplot(data    = dep_delay,
                        mapping = ggplot2::aes(x = dep_delay$origin, y = dep_delay$avg)) +
        ggplot2::geom_point(shape = 1) +
-       ggplot2::labs(title = "Mean departure delay of flights for airports",
+       ggplot2::labs(title = "Mean departure delay of flights from airports",
                      x     = "Airports",
                      y     = "Mean flight departure delay") +
-       ggplot2::geom_text(ggplot2::aes(label = outliers_dep), na.rm = TRUE, nudge_x = 0.15, size = 3) +
+       ggplot2::geom_text(ggplot2::aes(label = outliers_dep), na.rm = TRUE, nudge_y = 1.5, size = 3) +
        ggplot2::theme_classic() +
        ggplot2::theme(plot.title   = ggplot2::element_text(hjust = 0.5),
                       panel.border = ggplot2::element_rect(fill = NA)) +
@@ -173,11 +173,12 @@ visualize_airport_delays <- function() {
   g <- ggplot2::ggplot(data    = arr_delay,
                        mapping = ggplot2::aes(x = arr_delay$dest, y = arr_delay$avg)) +
        ggplot2::geom_point(shape = 1) +
-       ggplot2::labs(title = "Mean arrival delay of flights for airports",
+       ggplot2::labs(title = "Mean arrival delay of flights to airports",
                      x     = "Airports",
                      y     = "Mean flight arrival delay") +
-       ggplot2::geom_text(ggplot2::aes(label = outliers_arr), na.rm = TRUE, nudge_x = 0.15, size = 3) +
+       ggplot2::geom_text(ggplot2::aes(label = outliers_arr), na.rm = TRUE, nudge_y = 1.5, size = 3) +
        ggplot2::theme_classic() +
+       ggplot2::theme(axis.text.x  = element_blank()) +
        ggplot2::theme(plot.title   = ggplot2::element_text(hjust = 0.5),
                       panel.border = ggplot2::element_rect(fill = NA)) +
        ggplot2::geom_smooth(method = stats::loess, se = FALSE, col = 2)
