@@ -1,4 +1,4 @@
-# R-Programming-Lab
+# R-Programming
 Repository for R exercises
 
 # Travis Build Status Badge
