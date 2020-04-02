@@ -101,7 +101,7 @@ add_median_variable <- function(df, j) {
   df[["compared_to_median"]] <- ifelse(df[[j]] > median_val, "Greater", 
                                        ifelse(df[[j]] < median_val, "Smaller", "Median"))
   return(df)
-}
+} 
 
 #16. analyze_columns(df, j)
 analyze_columns <- function(df, j) {
